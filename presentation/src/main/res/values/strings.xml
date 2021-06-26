@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ma-test</string>
+
+    <string name="status_pending">À faire</string>
+    <string name="status_ended">Terminée</string>
+    <string name="todo_list_label">Liste de tâches de %s</string>
+
+</resources>
