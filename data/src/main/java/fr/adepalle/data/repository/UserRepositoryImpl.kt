@@ -15,13 +15,13 @@ class UserRepositoryImpl @Inject constructor(
 ) : UserRepository {
     override suspend fun getAllUsers(): List<User> {
         return userBusinessHelper.getAllUsers().map {
-            userEntityDataMapper.transformEntity(it)
+            userEntityDataMapper.transformEntityToModel(it)
         }
     }
 
     override suspend fun getTodosByUserId(userId: Int): List<Todo> {
         return userBusinessHelper.getTodosByUserId(userId).map {
-            todoEntityDataMapper.transformEntity(it)
+            todoEntityDataMapper.transformEntityToModel(it)
         }
     }
 }

@@ -1,13 +1,17 @@
 package fr.adepalle.data.di.module
 
+import android.content.Context
+import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import fr.adepalle.data.di.AppConstants.BASE_URL
 import fr.adepalle.data.manager.api.ApiManager
 import fr.adepalle.data.manager.api.ApiManagerImpl
 import fr.adepalle.data.manager.api.service.TodosServiceApi
+import fr.adepalle.data.manager.storage.db.AppDatabase
 import fr.adepalle.data.repository.UserRepositoryImpl
 import fr.adepalle.domain.repository.UserRepository
 import okhttp3.OkHttpClient
@@ -19,6 +23,10 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class NetModule {
+
+    @Provides
+    @Singleton
+    fun appDatabase(context: Context): AppDatabase = AppDatabase.getDatabase(context)
 
     @Provides
     @Singleton

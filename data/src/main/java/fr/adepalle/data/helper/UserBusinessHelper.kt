@@ -14,13 +14,13 @@ class UserBusinessHelper @Inject constructor(
 ) {
     suspend fun getAllUsers(): List<UserEntity> {
         return apiManager.getAllUsers().map {
-            userRemoteEntityDataMapper.transformRemoteEntity(it)
+            userRemoteEntityDataMapper.transformRemoteToEntity(it)
         }
     }
 
     suspend fun getTodosByUserId(userId: Int): List<TodoEntity> {
         return apiManager.getTodosByUserId(userId).map {
-            todoRemoteEntityDataMapper.transformRemoteEntity(it)
+            todoRemoteEntityDataMapper.transformRemoteToEntity(it)
         }
     }
 }
