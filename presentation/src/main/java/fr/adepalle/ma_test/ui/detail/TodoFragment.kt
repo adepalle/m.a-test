@@ -39,7 +39,6 @@ class TodoFragment : Fragment(R.layout.fragment_detail) {
 
         arguments?.getInt(BUNDLE_TODO_USER_ID)?.let {
             userId = it
-            
             viewModel.getAllTodosByUserId(it)
         }
     }
