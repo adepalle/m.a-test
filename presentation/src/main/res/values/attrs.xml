@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- region TaskStatus -->
+    <attr name="taskStatusDone" format="color" />
+    <attr name="taskStatusPending" format="color" />
+    <!-- endregion -->
+
+    <!--  region SnackBars  -->
+    <attr name="snackbarSuccessBackground" format="color" />
+    <attr name="snackbarWarningBackground" format="color" />
+    <attr name="snackbarErrorBackground" format="color" />
+    <!--  endregion  -->
+
+</resources>
