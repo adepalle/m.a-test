@@ -1,6 +1,6 @@
 package fr.adepalle.data.entity
 
-data class TodoEntity(
+data class TaskEntity(
     val userId: Int,
     val id: Int,
     val title: String,

@@ -3,8 +3,6 @@
 
     <string name="status_pending">À faire</string>
     <string name="status_ended">Terminée</string>
-    <string name="todo_list_label">Liste de tâches de %s</string>
-
 
     <!-- Errors -->
     <string name="error_general">Une erreur est survenue. Merci de réessayer ultérieurement.</string>

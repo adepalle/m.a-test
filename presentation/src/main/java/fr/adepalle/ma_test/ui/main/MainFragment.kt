@@ -41,6 +41,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
         binding = FragmentMainBinding.bind(view)
 
+        viewModel.retrieveUserList()
+
         setupView()
         observeUserList()
         observeViewState()
@@ -86,6 +88,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun onUserClicked(userId: Int) {
-        findNavController().navigate(MainFragmentDirections.actionMainFragmentToTodoFragment(userId))
+        findNavController().navigate(MainFragmentDirections.actionMainFragmentToTaskFragment(userId))
     }
 }

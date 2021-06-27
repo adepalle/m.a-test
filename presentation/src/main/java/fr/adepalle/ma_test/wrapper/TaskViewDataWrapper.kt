@@ -1,16 +1,16 @@
 package fr.adepalle.ma_test.wrapper
 
 import android.content.Context
-import fr.adepalle.domain.model.Todo
+import fr.adepalle.domain.model.Task
 import fr.adepalle.ma_test.R
 import fr.adepalle.ma_test.extensions.getColorFromAttr
 
-class TodoViewDataWrapper(private val todo: Todo) {
+class TaskViewDataWrapper(private val task: Task) {
 
-    fun getTitle() = todo.title
+    fun getTitle() = task.title
 
     fun getStatusText(context: Context): String {
-        return if (todo.completed) {
+        return if (task.completed) {
             context.getString(R.string.status_ended)
         } else {
             context.getString(R.string.status_pending)
@@ -18,18 +18,18 @@ class TodoViewDataWrapper(private val todo: Todo) {
     }
 
     fun getStatusIcon(): Int {
-        return if (todo.completed) {
-            R.drawable.todo_done
+        return if (task.completed) {
+            R.drawable.task_done
         } else {
-            R.drawable.todo_pending
+            R.drawable.task_pending
         }
     }
 
     fun getStatusColor(context: Context) = context.getColorFromAttr(
-        if (todo.completed) {
-            R.attr.todoStatusDone
+        if (task.completed) {
+            R.attr.taskStatusDone
         } else {
-            R.attr.todoStatusPending
+            R.attr.taskStatusPending
         }
     )
 }

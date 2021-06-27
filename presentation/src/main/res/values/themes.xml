@@ -13,9 +13,9 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
 
-        <!-- TodoStatus -->
-        <item name="todoStatusDone">@color/green</item>
-        <item name="todoStatusPending">@color/red</item>
+        <!-- TaskStatus -->
+        <item name="taskStatusDone">@color/green</item>
+        <item name="taskStatusPending">@color/red</item>
 
         <!-- SnackBar -->
         <item name="snackbarSuccessBackground">@color/light_blue</item>

@@ -1,6 +1,6 @@
 package fr.adepalle.domain.model
 
-data class Todo(
+data class Task(
     val userId: Int,
     val id: Int,
     val title: String,

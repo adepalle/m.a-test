@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- region TodoStatus -->
-    <attr name="todoStatusDone" format="color" />
-    <attr name="todoStatusPending" format="color" />
+    <!-- region TaskStatus -->
+    <attr name="taskStatusDone" format="color" />
+    <attr name="taskStatusPending" format="color" />
     <!-- endregion -->
 
     <!--  region SnackBars  -->

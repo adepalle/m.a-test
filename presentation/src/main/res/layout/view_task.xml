@@ -8,39 +8,39 @@
     android:padding="@dimen/user_item_padding">
 
     <TextView
-        android:id="@+id/todo_title_label"
+        android:id="@+id/task_title_label"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/base_margin"
         android:ellipsize="end"
         android:maxLines="4"
-        android:layout_marginEnd="@dimen/base_margin"
-        tools:text="Lorem ipsum "
+        app:layout_constraintBottom_toBottomOf="@+id/task_status_icon"
+        app:layout_constraintEnd_toStartOf="@+id/task_status_label"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/todo_status_label"
-        app:layout_constraintTop_toTopOf="@+id/todo_status_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/todo_status_icon"/>
+        app:layout_constraintTop_toTopOf="@+id/task_status_icon"
+        tools:text="Lorem ipsum " />
 
     <TextView
-        android:id="@+id/todo_status_label"
+        android:id="@+id/task_status_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/base_margin_double"
         android:layout_marginEnd="@dimen/base_margin"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/todo_status_icon"
-        app:layout_constraintTop_toTopOf="@+id/todo_status_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/todo_status_icon"
         android:textColor="@color/red"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/task_status_icon"
+        app:layout_constraintEnd_toStartOf="@+id/task_status_icon"
+        app:layout_constraintTop_toTopOf="@+id/task_status_icon"
         tools:text="À Faire" />
 
     <ImageView
-        android:id="@+id/todo_status_icon"
+        android:id="@+id/task_status_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/base_margin_half"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/red"
-        tools:src="@drawable/todo_pending" />
+        tools:src="@drawable/task_pending" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

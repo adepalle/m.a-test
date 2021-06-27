@@ -1,14 +1,14 @@
 package fr.adepalle.data.helper
 
-import fr.adepalle.data.entity.TodoEntity
+import fr.adepalle.data.entity.TaskEntity
 import fr.adepalle.data.entity.UserEntity
-import fr.adepalle.data.exception.TodoRecoveryFailedException
+import fr.adepalle.data.exception.TaskRecoveryFailedException
 import fr.adepalle.data.exception.UserRecoveryFailedExcetion
 import fr.adepalle.data.manager.api.ApiManager
 import fr.adepalle.data.manager.storage.db.DbManager
-import fr.adepalle.data.mapper.db.TodoDBEntityDataMapper
+import fr.adepalle.data.mapper.db.TaskDBEntityDataMapper
 import fr.adepalle.data.mapper.db.UserDBEntityDataMapper
-import fr.adepalle.data.mapper.remote.TodoRemoteEntityDataMapper
+import fr.adepalle.data.mapper.remote.TaskRemoteEntityDataMapper
 import fr.adepalle.data.mapper.remote.UserRemoteEntityDataMapper
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -19,8 +19,8 @@ class UserBusinessHelper @Inject constructor(
     private val dbManager: DbManager,
     private val userRemoteEntityDataMapper: UserRemoteEntityDataMapper,
     private val userDBEntityDataMapper: UserDBEntityDataMapper,
-    private val todoRemoteEntityDataMapper: TodoRemoteEntityDataMapper,
-    private val todoDBEntityDataMapper: TodoDBEntityDataMapper
+    private val taskRemoteEntityDataMapper: TaskRemoteEntityDataMapper,
+    private val taskDBEntityDataMapper: TaskDBEntityDataMapper
 ) {
     fun saveUserList(): Completable {
         return apiManager.getAllUsers().map {
@@ -31,23 +31,23 @@ class UserBusinessHelper @Inject constructor(
         }.ignoreElement().onErrorResumeNext { Completable.error(UserRecoveryFailedExcetion()) }
     }
 
-    fun saveTodoList(userId: Int): Completable {
-        return apiManager.getTodosByUserId(userId).map {
-            todoRemoteEntityDataMapper.transformRemoteEntityList(it)
-        }.doOnSuccess { todoUserList ->
-            dbManager.deleteAllTodosFromUserId(userId)
-            dbManager.saveTodoList(todoDBEntityDataMapper.transformEntityList(todoUserList))
-        }.ignoreElement().onErrorResumeNext { Completable.error(TodoRecoveryFailedException()) }
+    fun saveTaskList(userId: Int): Completable {
+        return apiManager.getTaskByUserId(userId).map {
+            taskRemoteEntityDataMapper.transformRemoteEntityList(it)
+        }.doOnSuccess { taskUserList ->
+            dbManager.deleteAllTaskFromUserId(userId)
+            dbManager.saveTaskList(taskDBEntityDataMapper.transformEntityList(taskUserList))
+        }.ignoreElement().onErrorResumeNext { Completable.error(TaskRecoveryFailedException()) }
     }
 
     fun getAllUsers(): Single<List<UserEntity>> {
         return Single.just(userDBEntityDataMapper.transformDBEntityList(dbManager.getUserList()))
     }
 
-    fun getTodosByUserId(userId: Int): Single<List<TodoEntity>> {
+    fun getTaskByUserId(userId: Int): Single<List<TaskEntity>> {
         return Single.just(
-            todoDBEntityDataMapper.transformDBEntityList(
-                dbManager.getTodoByUserId(
+            taskDBEntityDataMapper.transformDBEntityList(
+                dbManager.getTaskByUserId(
                     userId
                 )
             )

@@ -1,9 +1,9 @@
 package fr.adepalle.data.repository
 
 import fr.adepalle.data.helper.UserBusinessHelper
-import fr.adepalle.data.mapper.TodoEntityDataMapper
+import fr.adepalle.data.mapper.TaskEntityDataMapper
 import fr.adepalle.data.mapper.UserEntityDataMapper
-import fr.adepalle.domain.model.Todo
+import fr.adepalle.domain.model.Task
 import fr.adepalle.domain.model.User
 import fr.adepalle.domain.repository.UserRepository
 import io.reactivex.Single
@@ -12,7 +12,7 @@ import javax.inject.Inject
 class UserRepositoryImpl @Inject constructor(
     private val userBusinessHelper: UserBusinessHelper,
     private val userEntityDataMapper: UserEntityDataMapper,
-    private val todoEntityDataMapper: TodoEntityDataMapper
+    private val taskEntityDataMapper: TaskEntityDataMapper
 ) : UserRepository {
 
     /**
@@ -25,11 +25,11 @@ class UserRepositoryImpl @Inject constructor(
     }
 
     /**
-     * Retrieve todos by userId from database
+     * Retrieve tasks by userId from database
      */
-    override fun getTodosByUserId(userId: Int): Single<List<Todo>> = Single.defer {
-        userBusinessHelper.getTodosByUserId(userId).map {
-            todoEntityDataMapper.transformEntityList(it)
+    override fun getTaskByUserId(userId: Int): Single<List<Task>> = Single.defer {
+        userBusinessHelper.getTaskByUserId(userId).map {
+            taskEntityDataMapper.transformEntityList(it)
         }
     }
 
@@ -44,12 +44,12 @@ class UserRepositoryImpl @Inject constructor(
     }
 
     /**
-     * Refresh todos by userId from API and save it into database
+     * Refresh tasks by userId from API and save it into database
      */
-    override fun refreshTodosByUserId(userId: Int): Single<List<Todo>> = Single.defer {
-        userBusinessHelper.saveTodoList(userId).andThen(Single.defer {
-            userBusinessHelper.getTodosByUserId(userId)
-                .map { todoEntityDataMapper.transformEntityList(it) }
+    override fun refreshTaskByUserId(userId: Int): Single<List<Task>> = Single.defer {
+        userBusinessHelper.saveTaskList(userId).andThen(Single.defer {
+            userBusinessHelper.getTaskByUserId(userId)
+                .map { taskEntityDataMapper.transformEntityList(it) }
         })
     }
 }

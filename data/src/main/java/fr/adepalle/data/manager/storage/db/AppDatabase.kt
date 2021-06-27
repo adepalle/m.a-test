@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import fr.adepalle.data.entity.db.TodoDBEntity
+import fr.adepalle.data.entity.db.TaskDBEntity
 import fr.adepalle.data.entity.db.UserDBEntity
-import fr.adepalle.data.manager.storage.db.dao.TodoDao
+import fr.adepalle.data.manager.storage.db.dao.TaskDao
 import fr.adepalle.data.manager.storage.db.dao.UserDao
 
 /**
@@ -16,13 +16,13 @@ import fr.adepalle.data.manager.storage.db.dao.UserDao
 @Database(
     entities = [
         UserDBEntity::class,
-        TodoDBEntity::class
+        TaskDBEntity::class
     ], version = 1,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
-    abstract fun todoDao(): TodoDao
+    abstract fun taskDao(): TaskDao
 
     /**
      * We use a companion object so that future migrations will be added in relevant class (here) and not in DI module

@@ -12,7 +12,7 @@ import fr.adepalle.data.di.AppConstants.BASE_URL
 import fr.adepalle.data.executor.JobExecutor
 import fr.adepalle.data.manager.api.ApiManager
 import fr.adepalle.data.manager.api.ApiManagerImpl
-import fr.adepalle.data.manager.api.service.TodosServiceApi
+import fr.adepalle.data.manager.api.service.UserTaskServiceApi
 import fr.adepalle.data.manager.storage.db.AppDatabase
 import fr.adepalle.data.manager.storage.db.DbManager
 import fr.adepalle.data.manager.storage.db.DbManagerImpl
@@ -47,14 +47,14 @@ class NetModule {
         okHttpClient: OkHttpClient,
         callAdapterFactory: CallAdapter.Factory,
         converter: Converter.Factory
-    ): TodosServiceApi =
+    ): UserTaskServiceApi =
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addCallAdapterFactory(callAdapterFactory)
             .addConverterFactory(converter)
             .build()
-            .create(TodosServiceApi::class.java)
+            .create(UserTaskServiceApi::class.java)
 
     /**
      * Retrofit Client
@@ -99,8 +99,8 @@ class NetModule {
 
     @Singleton
     @Provides
-    fun providesTodosRepository(todosRepository: UserRepositoryImpl): UserRepository {
-        return todosRepository
+    fun providesUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository {
+        return userRepositoryImpl
     }
 
     @Provides

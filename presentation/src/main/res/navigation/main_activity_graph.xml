@@ -11,17 +11,17 @@
         android:label="fragment_main"
         tools:layout="@layout/fragment_main">
         <action
-            android:id="@+id/action_mainFragment_to_todoFragment"
-            app:destination="@id/todoFragment">
+            android:id="@+id/action_mainFragment_to_taskFragment"
+            app:destination="@id/taskFragment">
             <argument
-                android:name="bundleTodoUserId"
+                android:name="bundleTaskUserId"
                 app:argType="integer" />
         </action>
     </fragment>
     <fragment
-        android:id="@+id/todoFragment"
-        android:name="fr.adepalle.ma_test.ui.detail.TodoFragment"
-        android:label="TodoFragment"
+        android:id="@+id/taskFragment"
+        android:name="fr.adepalle.ma_test.ui.detail.TaskFragment"
+        android:label="TaskFragment"
         tools:layout="@layout/fragment_detail" />
 
 </navigation>

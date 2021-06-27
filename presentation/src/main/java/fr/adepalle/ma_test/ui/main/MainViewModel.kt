@@ -25,7 +25,6 @@ class MainViewModel @Inject constructor(
 
     init {
         refreshUserList()
-        retrieveUserList()
     }
 
     fun retrieveUserList() {
