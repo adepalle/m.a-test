@@ -1,25 +1,13 @@
 package fr.adepalle.data.di.module
 
-import android.content.Context
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import fr.adepalle.data.di.AppConstants.BASE_URL
-import fr.adepalle.data.executor.JobExecutor
-import fr.adepalle.data.manager.api.ApiManager
-import fr.adepalle.data.manager.api.ApiManagerImpl
 import fr.adepalle.data.manager.api.service.UserTaskServiceApi
-import fr.adepalle.data.manager.storage.db.AppDatabase
-import fr.adepalle.data.manager.storage.db.DbManager
-import fr.adepalle.data.manager.storage.db.DbManagerImpl
-import fr.adepalle.data.repository.UserRepositoryImpl
 import fr.adepalle.domain.BuildConfig
-import fr.adepalle.domain.executor.ThreadExecutor
-import fr.adepalle.domain.repository.UserRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.CallAdapter
@@ -29,14 +17,11 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+const val BASE_URL = "https://jsonplaceholder.typicode.com/"
+
 @Module
 @InstallIn(SingletonComponent::class)
 class NetModule {
-
-    @Provides
-    @Singleton
-    fun appDatabase(@ApplicationContext context: Context): AppDatabase =
-        AppDatabase.getDatabase(context)
 
     /**
      * Retrofit is a heavy object, so we put it as a Singleton to prevent re-creation
@@ -96,26 +81,4 @@ class NetModule {
                 HttpLoggingInterceptor.Level.NONE
             }
         }
-
-    @Singleton
-    @Provides
-    fun providesUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository {
-        return userRepositoryImpl
-    }
-
-    @Provides
-    @Singleton
-    fun provideJobExecutor(jobExecutor: JobExecutor): ThreadExecutor = jobExecutor
-
-    @Provides
-    @Singleton
-    fun provideApiManager(apiManagerImpl: ApiManagerImpl): ApiManager {
-        return apiManagerImpl
-    }
-
-    @Provides
-    @Singleton
-    fun provideDbManager(dbManagerImpl: DbManagerImpl): DbManager {
-        return dbManagerImpl
-    }
 }
