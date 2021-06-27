@@ -9,6 +9,7 @@
     <string name="error_request_failed">La requête a échoué</string>
     <string name="error_offline">Veuillez vérifier votre connexion internet</string>
     <string name="error_user_list_recovery_failed">Une erreur est survenue, impossible de récupérer la liste des utilisateurs</string>
+    <string name="error_task_list_recovery_failed">Une erreur est survenue, impossible de récupérer la liste des taches</string>
 
 
 </resources>

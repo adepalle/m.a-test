@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class TaskDBEntity(
-    @PrimaryKey val userId: Int,
-    @ColumnInfo val id: Int,
+    @PrimaryKey val id: Int,
+    @ColumnInfo val userId: Int,
     @ColumnInfo val title: String,
     @ColumnInfo val completed: Boolean,
 )

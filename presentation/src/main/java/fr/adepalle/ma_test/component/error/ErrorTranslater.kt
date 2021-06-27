@@ -5,6 +5,7 @@ import dagger.Reusable
 import fr.adepalle.data.exception.OfflineException
 import fr.adepalle.data.exception.RequestFailException
 import fr.adepalle.data.exception.TaskRecoveryFailedException
+import fr.adepalle.data.exception.UserRecoveryFailedException
 import fr.adepalle.ma_test.R
 import javax.inject.Inject
 
@@ -19,7 +20,8 @@ class ErrorTranslater @Inject constructor() {
             when (throwable) {
                 is RequestFailException -> R.string.error_request_failed
                 is OfflineException -> R.string.error_offline
-                is TaskRecoveryFailedException -> R.string.error_user_list_recovery_failed
+                is UserRecoveryFailedException -> R.string.error_user_list_recovery_failed
+                is TaskRecoveryFailedException -> R.string.error_task_list_recovery_failed
                 else -> R.string.error_general
             }
         )

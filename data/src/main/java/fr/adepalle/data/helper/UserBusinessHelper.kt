@@ -3,7 +3,7 @@ package fr.adepalle.data.helper
 import fr.adepalle.data.entity.TaskEntity
 import fr.adepalle.data.entity.UserEntity
 import fr.adepalle.data.exception.TaskRecoveryFailedException
-import fr.adepalle.data.exception.UserRecoveryFailedExcetion
+import fr.adepalle.data.exception.UserRecoveryFailedException
 import fr.adepalle.data.manager.api.ApiManager
 import fr.adepalle.data.manager.storage.db.DbManager
 import fr.adepalle.data.mapper.db.TaskDBEntityDataMapper
@@ -28,7 +28,7 @@ class UserBusinessHelper @Inject constructor(
         }.doOnSuccess { apiUserList ->
             dbManager.deleteAllUsers()
             dbManager.saveUserList(userDBEntityDataMapper.transformEntityList(apiUserList))
-        }.ignoreElement().onErrorResumeNext { Completable.error(UserRecoveryFailedExcetion()) }
+        }.ignoreElement().onErrorResumeNext { Completable.error(UserRecoveryFailedException()) }
     }
 
     fun saveTaskList(userId: Int): Completable {

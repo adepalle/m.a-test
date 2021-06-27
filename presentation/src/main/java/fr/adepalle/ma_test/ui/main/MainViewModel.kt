@@ -10,8 +10,6 @@ import fr.adepalle.ma_test.SingleLiveEvent
 import fr.adepalle.ma_test.wrapper.UserViewDataWrapper
 import javax.inject.Inject
 
-private const val ERROR_MESSAGE_USER_LOAD = "Error during users loading in ViewModel"
-
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val retrieveAllUsers: RetrieveAllUsers,
@@ -22,10 +20,6 @@ class MainViewModel @Inject constructor(
     private val errorLiveData = SingleLiveEvent<Throwable>()
 
     override var currentViewState = BaseViewState.WAITING
-
-    init {
-        refreshUserList()
-    }
 
     fun retrieveUserList() {
         updateViewState(BaseViewState.LOADING)

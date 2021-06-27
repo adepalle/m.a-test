@@ -41,6 +41,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
         binding = FragmentMainBinding.bind(view)
 
+        viewModel.refreshUserList()
         viewModel.retrieveUserList()
 
         setupView()
