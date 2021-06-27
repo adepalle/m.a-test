@@ -1,4 +1,4 @@
-package fr.adepalle.ma_test
+package fr.adepalle.ma_test.base
 
 import android.util.Log
 import androidx.annotation.MainThread

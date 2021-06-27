@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
-import fr.adepalle.ma_test.BaseViewState
+import fr.adepalle.ma_test.base.BaseViewState
 import fr.adepalle.ma_test.R
 import fr.adepalle.ma_test.component.snackbar.SnackbarComponent
 import fr.adepalle.ma_test.databinding.FragmentDetailBinding

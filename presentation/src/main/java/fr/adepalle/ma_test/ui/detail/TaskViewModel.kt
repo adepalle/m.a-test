@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import fr.adepalle.domain.usecase.RefreshAllTaskByUserId
 import fr.adepalle.domain.usecase.RetrieveAllTaskByUserId
-import fr.adepalle.ma_test.BaseViewState
-import fr.adepalle.ma_test.EnumStateViewModel
-import fr.adepalle.ma_test.SingleLiveEvent
+import fr.adepalle.ma_test.base.BaseViewState
+import fr.adepalle.ma_test.base.EnumStateViewModel
+import fr.adepalle.ma_test.base.SingleLiveEvent
 import fr.adepalle.ma_test.wrapper.TaskViewDataWrapper
 import javax.inject.Inject
 

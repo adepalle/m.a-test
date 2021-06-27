@@ -1,4 +1,4 @@
-package fr.adepalle.ma_test
+package fr.adepalle.ma_test.base
 
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable

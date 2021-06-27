@@ -10,7 +10,7 @@ class RefreshAllTaskByUserId @Inject constructor(
     private val userRepository: UserRepository
 ) : SingleParametrizedUseCase<List<Task>, RefreshAllTaskByUserId.Params>() {
 
-    override fun build(params: RefreshAllTaskByUserId.Params): Single<List<Task>> {
+    override fun build(params: Params): Single<List<Task>> {
         return userRepository.refreshTaskByUserId(params.userId)
     }
 
