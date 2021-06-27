@@ -8,7 +8,6 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="fr.adepalle.ma_test.ui.main.MainFragment"
-        android:label="fragment_main"
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_taskFragment"
@@ -21,7 +20,6 @@
     <fragment
         android:id="@+id/taskFragment"
         android:name="fr.adepalle.ma_test.ui.detail.TaskFragment"
-        android:label="TaskFragment"
         tools:layout="@layout/fragment_detail" />
 
 </navigation>

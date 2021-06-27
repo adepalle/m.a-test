@@ -10,14 +10,14 @@ class UserDBEntityDataMapper @Inject constructor() : DBMapper<UserDBEntity, User
 
     override fun transformDBToEntity(input: UserDBEntity): UserEntity = UserEntity(
         id = input.id,
-        name = input.username,
+        name = input.name,
         username = input.username,
         email = input.email
     )
 
     override fun transformEntityToDB(input: UserEntity): UserDBEntity = UserDBEntity(
         id = input.id,
-        name = input.username,
+        name = input.name,
         username = input.username,
         email = input.email
     )

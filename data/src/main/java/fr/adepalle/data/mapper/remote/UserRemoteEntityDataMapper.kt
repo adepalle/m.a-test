@@ -13,14 +13,14 @@ class UserRemoteEntityDataMapper @Inject constructor() :
 
     override fun transformEntityToRemote(input: UserEntity): UserRemoteEntity = UserRemoteEntity(
         id = input.id,
-        name = input.username,
+        name = input.name,
         username = input.username,
         email = input.email
     )
 
     override fun transformRemoteToEntity(input: UserRemoteEntity): UserEntity = UserEntity(
         id = input.id,
-        name = input.username,
+        name = input.name,
         username = input.username,
         email = input.email
     )
