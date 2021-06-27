@@ -1,42 +1,65 @@
 package fr.adepalle.ma_test.ui.main
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.LiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
-import fr.adepalle.domain.model.User
+import fr.adepalle.domain.usecase.RefreshAllUsers
 import fr.adepalle.domain.usecase.RetrieveAllUsers
-import fr.adepalle.domain.usecase.base.BaseUseCase
+import fr.adepalle.ma_test.BaseViewState
+import fr.adepalle.ma_test.EnumStateViewModel
+import fr.adepalle.ma_test.SingleLiveEvent
 import fr.adepalle.ma_test.wrapper.UserViewDataWrapper
-import kotlinx.coroutines.launch
 import javax.inject.Inject
+
+private const val ERROR_MESSAGE_USER_LOAD = "Error during users loading in ViewModel"
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val getAllUsers: RetrieveAllUsers
-) : ViewModel() {
+    private val retrieveAllUsers: RetrieveAllUsers,
+    private val refreshAllUsers: RefreshAllUsers
+) : EnumStateViewModel<BaseViewState>() {
 
-    var usersLiveData = MutableLiveData<List<UserViewDataWrapper>>()
+    private val usersLiveData = SingleLiveEvent<List<UserViewDataWrapper>>()
+    private val errorLiveData = SingleLiveEvent<Throwable>()
 
-    private val allUsersUseCaseCallback = object : BaseUseCase.Callback<List<User>> {
-        override fun onSuccess(result: List<User>) {
-            usersLiveData.value = result.map {
-                UserViewDataWrapper(it)
+    override var currentViewState = BaseViewState.WAITING
+
+    init {
+        refreshUserList()
+        retrieveUserList()
+    }
+
+    fun retrieveUserList() {
+        updateViewState(BaseViewState.LOADING)
+        retrieveAllUsers.subscribe(
+            onError = {
+                errorLiveData.postValue(it)
+                updateViewState(BaseViewState.WAITING)
+            },
+            onSuccess = { userList ->
+                usersLiveData.postValue(userList.map {
+                    UserViewDataWrapper(it)
+                })
+                updateViewState(BaseViewState.WAITING)
             }
-
-        }
-
-        override fun onError(throwable: Throwable) {
-            Log.e("AllUserUseCase", throwable.stackTraceToString())
-            usersLiveData.value = emptyList()
-        }
+        )
     }
 
-    fun getAllUsers() {
-        viewModelScope.launch {
-            getAllUsers.execute(allUsersUseCaseCallback)
-        }
+    fun refreshUserList() {
+        updateViewState(BaseViewState.LOADING)
+        refreshAllUsers.subscribe(
+            onError = {
+                errorLiveData.postValue(it)
+                updateViewState(BaseViewState.WAITING)
+            },
+            onSuccess = { userList ->
+                usersLiveData.postValue(userList.map {
+                    UserViewDataWrapper(it)
+                })
+                updateViewState(BaseViewState.WAITING)
+            }
+        )
     }
 
+    fun getUserListLiveEvent(): LiveData<List<UserViewDataWrapper>> = usersLiveData
+    fun getErrorLiveEvent(): LiveData<Throwable> = errorLiveData
 }

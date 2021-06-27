@@ -8,10 +8,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
+import fr.adepalle.ma_test.BaseViewState
 import fr.adepalle.ma_test.R
+import fr.adepalle.ma_test.component.snackbar.SnackbarComponent
 import fr.adepalle.ma_test.databinding.FragmentMainBinding
+import fr.adepalle.ma_test.extensions.getColorFromAttr
+import fr.adepalle.ma_test.extensions.observeSafe
 import fr.adepalle.ma_test.ui.main.item.UserAdapter
-import fr.adepalle.ma_test.wrapper.UserViewDataWrapper
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -19,8 +22,13 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private val viewModel: MainViewModel by viewModels()
 
+    private lateinit var binding: FragmentMainBinding
+
     @Inject
     lateinit var userAdapter: UserAdapter
+
+    @Inject
+    lateinit var snackbarComponent: SnackbarComponent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +39,14 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val binding = FragmentMainBinding.bind(view)
+        binding = FragmentMainBinding.bind(view)
 
+        setupView()
+        observeUserList()
+        observeViewState()
+    }
+
+    private fun setupView() {
         with(binding) {
             usersRecyclerView.apply {
                 layoutManager = LinearLayoutManager(requireContext()).apply {
@@ -41,14 +55,34 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 adapter = userAdapter
             }
             userAdapter.onItemClicked = ::onUserClicked
-        }
 
-        viewModel.usersLiveData.observe(viewLifecycleOwner, ::usersListUpdated)
-        viewModel.getAllUsers()
+            userListSwipeRefresh.setOnRefreshListener {
+                viewModel.refreshUserList()
+            }
+            userListSwipeRefresh.setColorSchemeColors(requireContext().getColorFromAttr(R.attr.colorPrimary))
+        }
     }
 
-    private fun usersListUpdated(result: List<UserViewDataWrapper>) {
-        userAdapter.setItems(result)
+    private fun observeUserList() {
+        viewModel.getUserListLiveEvent().observeSafe(viewLifecycleOwner) {
+            userAdapter.setItems(it)
+        }
+        viewModel.getErrorLiveEvent().observeSafe(viewLifecycleOwner) {
+            snackbarComponent.displayError(requireContext(), it, requireView())
+        }
+    }
+
+    private fun observeViewState() {
+        viewModel.getViewState().observeSafe(viewLifecycleOwner) { state ->
+            when (state) {
+                BaseViewState.WAITING -> {
+                    binding.userListSwipeRefresh.isRefreshing = false
+                }
+                BaseViewState.LOADING -> {
+                    binding.userListSwipeRefresh.isRefreshing = true
+                }
+            }
+        }
     }
 
     private fun onUserClicked(userId: Int) {

@@ -6,4 +6,10 @@
     <attr name="todoStatusPending" format="color" />
     <!-- endregion -->
 
+    <!--  region SnackBars  -->
+    <attr name="snackbarSuccessBackground" format="color" />
+    <attr name="snackbarWarningBackground" format="color" />
+    <attr name="snackbarErrorBackground" format="color" />
+    <!--  endregion  -->
+
 </resources>

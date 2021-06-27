@@ -17,5 +17,10 @@
         <item name="todoStatusDone">@color/green</item>
         <item name="todoStatusPending">@color/red</item>
 
+        <!-- SnackBar -->
+        <item name="snackbarSuccessBackground">@color/light_blue</item>
+        <item name="snackbarWarningBackground">@color/dark_orange</item>
+        <item name="snackbarErrorBackground">@color/red</item>
+
     </style>
 </resources>

@@ -31,6 +31,10 @@ class DbManagerImpl @Inject constructor(appDatabase: AppDatabase) : DbManager {
         userDao.deleteAll()
     }
 
+    override fun deleteAllTodosFromUserId(userId: Int) {
+        todoDao.deleteAllFromUserId(userId)
+    }
+
     override fun deleteAllTodos() {
         todoDao.deleteAll()
     }

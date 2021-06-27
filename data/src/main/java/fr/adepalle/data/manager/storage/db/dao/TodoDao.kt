@@ -17,4 +17,7 @@ interface TodoDao {
 
     @Query("DELETE FROM TodoDBEntity")
     fun deleteAll()
+
+    @Query("DELETE FROM TodoDBEntity where userId like :userId")
+    fun deleteAllFromUserId(userId: Int)
 }

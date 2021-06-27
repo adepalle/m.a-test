@@ -6,12 +6,12 @@ import fr.adepalle.domain.usecase.base.SingleUseCase
 import io.reactivex.Single
 import javax.inject.Inject
 
-class RetrieveAllUsers @Inject constructor(
+class RefreshAllUsers @Inject constructor(
     private val userRepository: UserRepository
 ) : SingleUseCase<List<User>>() {
 
     override fun build(): Single<List<User>> {
-        return userRepository.retrieveAllUsers()
+        return userRepository.refreshAllUsers()
     }
 
 }

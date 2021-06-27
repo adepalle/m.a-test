@@ -9,5 +9,6 @@ interface DbManager {
     fun saveUserList(userDBEntityList: List<UserDBEntity>)
     fun saveTodoList(todoDBEntityList: List<TodoDBEntity>)
     fun deleteAllUsers()
+    fun deleteAllTodosFromUserId(userId: Int)
     fun deleteAllTodos()
 }

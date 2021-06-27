@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import fr.adepalle.domain.model.Todo
 import fr.adepalle.domain.usecase.RetrieveAllTodosByUserId
-import fr.adepalle.domain.usecase.base.BaseParametrizedUseCase
 import fr.adepalle.ma_test.wrapper.TodoViewDataWrapper
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,12 +19,12 @@ class TodoViewModel @Inject constructor(
     var todosLiveData = MutableLiveData<List<TodoViewDataWrapper>>()
 
     fun getAllTodosByUserId(userId: Int) {
-        viewModelScope.launch {
+        /*viewModelScope.launch {
             getAllTodosByUserId.execute(userId, allTodosByUserIdUseCaseCallback)
-        }
+        }*/
     }
 
-    private val allTodosByUserIdUseCaseCallback =
+    /*private val allTodosByUserIdUseCaseCallback =
         object : BaseParametrizedUseCase.Callback<List<Todo>> {
             override fun onSuccess(result: List<Todo>) {
                 todosLiveData.value = result.map {
@@ -37,7 +36,7 @@ class TodoViewModel @Inject constructor(
                 Log.e("AllTodosByUserIdUseCase", throwable.stackTraceToString())
                 todosLiveData.value = emptyList()
             }
-        }
+        }*/
 
 
 }
